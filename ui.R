@@ -1,25 +1,23 @@
-#This is the ui code2
+#This is the ui code
 
 library(shiny)
 
 shinyUI(fluidPage(
   
-  # Application title
-  titlePanel("Old Faithful Geyser Data"),
+  # Title
+  titlePanel("Smoking Alcohol and Esophageal cancer"),
   
-  # Sidebar with a slider input for number of bins
   sidebarLayout(
     sidebarPanel(
-      sliderInput("bins",
-                  "Number of bins:",
-                  min = 1,
-                  max = 50,
-                  value = 30)
+      selectInput("agegp","Age Group:",levels(esoph$agegp)),
+      selectInput("alcgp","Alcohol Group:",levels(esoph$alcgp)),
+      selectInput("tobgp","Tobacco Group:",levels(esoph$tobgp))
     ),
+  
     
     # Show a plot of the generated distribution
     mainPanel(
-      plotOutput("distPlot")
+      plotOutput("plot")
     )
   )
 ))
