@@ -4,15 +4,12 @@ library(shiny)
 
 shinyServer(function(input, output) {
   
-  output$distPlot <- renderPlot({
+  output$plot <- renderPlot({
     
-    # generate bins based on input$bins from ui.R
-    x    <- faithful[, 2]
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
+    z<-esoph[(esoph$agegp==input$agegp)&(esoph$ncontrols<input$ncontrols),]
     
-    # draw the histogram with the specified number of bins
-    hist(x, breaks = bins, col = 'darkgray', border = 'white')
-    
+    plot(z$ncontrols,z$ncases,xlab="Number of Controls",ylab="Number of Cases")
+    abline(lm(z$ncases~z$ncontrols))
   })
   
 })
